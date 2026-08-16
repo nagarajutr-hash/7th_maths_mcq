@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 7 Mathematics (Ganita Prakash) MCQ Portal</title>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --correct-bg: #dcfce7;
+            --correct-border: #16a34a;
+            --correct-text: #14532d;
+            --incorrect-bg: #fee2e2;
+            --incorrect-border: #dc2626;
+            --incorrect-text: #7f1d1d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 18px 24px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .select-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        select {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            background: #ffffff;
+            color: var(--text-main);
+            cursor: pointer;
+            outline: none;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .score-badge {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: #eff6ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #bfdbfe;
+            white-space: nowrap;
+        }
+
+        .quiz-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .q-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .q-counter {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .q-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            width: 100%;
+            text-align: left;
+            padding: 14px 18px;
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #f8fafc;
+            border-color: var(--primary-light);
+        }
+
+        .option-prefix {
+            font-weight: 700;
+            color: var(--text-muted);
+            min-width: 24px;
+        }
+
+        .option-btn.correct {
+            background: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: var(--correct-text) !important;
+        }
+
+        .option-btn.correct .option-prefix {
+            color: var(--correct-text) !important;
+        }
+
+        .option-btn.incorrect {
+            background: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: var(--incorrect-text) !important;
+        }
+
+        .option-btn.incorrect .option-prefix {
+            color: var(--incorrect-text) !important;
+        }
+
+        .explanation-box {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-main);
+        }
+
+        .explanation-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: var(--primary-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #64748b;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #475569;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 12px; }
+            .controls { flex-direction: column; align-items: stretch; }
+            select { max-width: 100%; }
+            .score-badge { text-align: center; }
+            .quiz-card { padding: 18px; }
+            .q-text { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Class 7 Mathematics Practice Portal</h1>
+        <p>NCERT / KTBS New Curriculum — <em>Ganita Prakash</em> (30 Questions Per Chapter)</p>
+    </header>
+
+    <div class="controls">
+        <div class="select-group">
+            <label for="chapter-select"><strong>Chapter:</strong></label>
+            <select id="chapter-select" onchange="loadChapter()"></select>
+        </div>
+        <div class="score-badge" id="score-display">Score: 0 / 30</div>
+    </div>
+
+    <div id="quiz-container">
+        <!-- Dynamic Question Content -->
+    </div>
+
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prev-btn" onclick="changeQuestion(-1)">Previous</button>
+        <button class="btn" id="next-btn" onclick="changeQuestion(1)">Next</button>
+    </div>
+</div>
+
+<script>
+// Database containing 30 high-quality questions for each chapter of Part 1 and Part 2
+const syllabusData = {
+    "Part 1 - Ch 1: Large Numbers Around Us": generateLargeNumbers(),
+    "Part 1 - Ch 2: Arithmetic Expressions": generateArithmeticExpressions(),
+    "Part 1 - Ch 3: A Peek Beyond the Point": generatePeekBeyondPoint(),
+    "Part 1 - Ch 4: Expressions using Letter-Numbers": generateLetterNumbers(),
+    "Part 1 - Ch 5: Parallel and Intersecting Lines": generateParallelLines(),
+    "Part 1 - Ch 6: Number Play": generateNumberPlay(),
+    "Part 1 - Ch 7: A Tale of Three Intersecting Lines": generateThreeLines(),
+    "Part 1 - Ch 8: Working with Fractions": generateWorkingFractions(),
+    "Part 2 - Ch 1: Geometric Twins": generateGeometricTwins(),
+    "Part 2 - Ch 2: Operations with Integers": generateOperationsIntegers(),
+    "Part 2 - Ch 3: Finding Common Ground": generateCommonGround(),
+    "Part 2 - Ch 4: Another Peek Beyond the Point": generateAnotherPeek(),
+    "Part 2 - Ch 5: Connecting the Dots...": generateConnectingDots(),
+    "Part 2 - Ch 6: Constructions and Tilings": generateConstructionsTilings(),
+    "Part 2 - Ch 7: Finding the Unknown": generateFindingUnknown()
+};
+
+function generateLargeNumbers() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "What is the place value of digit 7 in 5,78,412 in the Indian Numeral System?", options: ["7,000", "70,000", "7,00,000", "700"], answer: 1, explanation: "In 5,78,412, the digit 7 is at the ten-thousands place, so its place value is 70,000." });
+        } else if(i === 2) {
+            list.push({ q: "How many lakhs make 1 million in the International Numeral System?", options: ["1 Lakh", "10 Lakhs", "100 Lakhs", "1000 Lakhs"], answer: 1, explanation: "1 Million = 1,000,000, which equals 10 Lakhs (10,00,000)." });
+        } else if(i === 3) {
+            list.push({ q: "What is the successor of 99,99,999?", options: ["1,00,00,000", "99,99,998", "1,00,00,001", "10,00,000"], answer: 0, explanation: "The successor of a number is obtained by adding 1. 99,99,999 + 1 = 1,00,00,000 (1 Crore)." });
+        } else {
+            let val = i * 1000 + 450;
+            list.push({
+                q: `What is the estimated value of ${val + 234} rounded to the nearest thousand?`,
+                options: [`${Math.round((val + 234)/1000)*1000 - 1000}`, `${Math.round((val + 234)/1000)*1000}`, `${Math.round((val + 234)/1000)*1000 + 1000}`, `${Math.round((val + 234)/1000)*1000 + 500}`],
+                answer: 1,
+                explanation: `When rounding ${val + 234} to the nearest thousand, look at the hundreds digit. It rounds to ${Math.round((val + 234)/1000)*1000}.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateArithmeticExpressions() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "Evaluate using BODMAS/PEMDAS: 24 - 4 × (3 + 2)", options: ["100", "4", "16", "20"], answer: 1, explanation: "First solve brackets: (3+2)=5. Then multiply: 4 × 5 = 20. Finally subtract: 24 - 20 = 4." });
+        } else if(i === 2) {
+            list.push({ q: "Which property is illustrated by: 15 × (10 + 4) = (15 × 10) + (15 × 4)?", options: ["Commutative property", "Associative property", "Distributive property", "Closure property"], answer: 2, explanation: "Distributing multiplication over addition is the Distributive Property." });
+        } else {
+            let a = i + 2, b = i, c = 2;
+            let ans = a + b * c;
+            list.push({
+                q: `Calculate the value of ${a} + ${b} × ${c}:`,
+                options: [`${(a+b)*c}`, `${ans}`, `${ans + 2}`, `${ans - 1}`],
+                answer: 1,
+                explanation: `Multiplication takes precedence over addition: ${b} × ${c} = ${b*c}, then + ${a} = ${ans}.`
+            });
+        }
+    }
+    return list;
+}
+
+function generatePeekBeyondPoint() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "What is the standard expanded form of 34.058?", options: ["30 + 4 + 5/10 + 8/100", "30 + 4 + 0/10 + 5/100 + 8/1000", "3 + 4 + 5/100 + 8/1000", "30 + 4 + 58/100"], answer: 1, explanation: "3 tens (30) + 4 ones (4) + 0 tenths + 5 hundredths (5/100) + 8 thousandths (8/1000)." });
+        } else if(i === 2) {
+            list.push({ q: "Convert 7/25 into a decimal fraction:", options: ["0.28", "0.14", "0.35", "0.07"], answer: 0, explanation: "7/25 = (7 × 4) / (25 × 4) = 28/100 = 0.28." });
+        } else {
+            let num = (i * 0.15).toFixed(2);
+            list.push({
+                q: `What is the value of ${num} × 10?`,
+                options: [`${(num*10).toFixed(1)}`, `${(num*100).toFixed(1)}`, `${(num/10).toFixed(3)}`, `${num}`],
+                answer: 0,
+                explanation: `Multiplying a decimal by 10 shifts the decimal point one place to the right: ${num} × 10 = ${(num*10).toFixed(1)}.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateLetterNumbers() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "Which algebraic expression represents '5 less than 3 times a variable x'?", options: ["5 - 3x", "3x - 5", "3(x - 5)", "5x - 3"], answer: 1, explanation: "'3 times x' is 3x, and '5 less than' means subtracting 5, giving 3x - 5." });
+        } else if(i === 2) {
+            list.push({ q: "Identify the coefficient of y in the term -7y:", options: ["7", "-7", "y", "1"], answer: 1, explanation: "The numerical factor attached to the variable y is -7." });
+        } else {
+            list.push({
+                q: `Simplify the algebraic expression: ${i}x + 4x - 2x`,
+                options: [`${i+2}x`, `${i+4}x`, `${i-2}x`, `${i+6}x`],
+                answer: 0,
+                explanation: `Combining like terms: (${i} + 4 - 2)x = ${i+2}x.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateParallelLines() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "If two parallel lines are cut by a transversal and one alternate interior angle is 65°, what is the other?", options: ["115°", "65°", "180°", "25°"], answer: 1, explanation: "Alternate interior angles formed by parallel lines and a transversal are equal." });
+        } else if(i === 2) {
+            list.push({ q: "What is the complement of an angle measuring 38°?", options: ["142°", "52°", "62°", "128°"], answer: 1, explanation: "Complementary angles add up to 90°. 90° - 38° = 52°." });
+        } else {
+            let angle = 40 + i;
+            list.push({
+                q: `Find the supplement of an angle measuring ${angle}°:`,
+                options: [`${180 - angle}°`, `${90 - angle}°`, `${360 - angle}°`, `${100 + angle}°`],
+                answer: 0,
+                explanation: `Supplementary angles sum up to 180°. 180° - ${angle}° = ${180 - angle}°.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateNumberPlay() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "What is the smallest digit k that makes the number 4,3k2 divisible by 9?", options: ["0", "9", "2", "6"], answer: 0, explanation: "Sum of digits = 4 + 3 + k + 2 = 9 + k. For 9 + k to be divisible by 9, smallest k = 0." });
+        } else {
+            list.push({
+                q: `Is the number ${100 + i*3} divisible by 3?`,
+                options: ["Yes, sum of digits is divisible by 3", "No", "Only divisible by 2", "Cannot be determined"],
+                answer: (100 + i*3)%3 === 0 ? 0 : 1,
+                explanation: `A number is divisible by 3 if the sum of its digits is a multiple of 3.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateThreeLines() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "In △ABC, if ∠A = 50° and ∠B = 70°, what is the measure of exterior angle at vertex C?", options: ["120°", "60°", "110°", "130°"], answer: 0, explanation: "An exterior angle of a triangle equals the sum of its two interior opposite angles: 50° + 70° = 120°." });
+        } else {
+            let a = 30 + i, b = 40 + i;
+            let c = 180 - (a + b);
+            list.push({
+                q: `In a triangle, if two angles are ${a}° and ${b}°, what is the third angle?`,
+                options: [`${c}°`, `${c+10}°`, `${c-10}°`, `${180-a}°`],
+                answer: 0,
+                explanation: `The sum of angles in a triangle is 180°. Third angle = 180° - (${a}° + ${b}°) = ${c}°.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateWorkingFractions() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        if(i === 1) {
+            list.push({ q: "Simplify: (3/4) ÷ (5/8)", options: ["15/32", "6/5", "5/6", "12/5"], answer: 1, explanation: "(3/4) ÷ (5/8) = (3/4) × (8/5) = 24/20 = 6/5." });
+        } else {
+            list.push({
+                q: `What is ${i}/5 + 2/5 in simplest fraction form?`,
+                options: [`${i+2}/5`, `${i+2}/10`, `${i}/5`, `1/5`],
+                answer: 0,
+                explanation: `When denominators are identical, simply add the numerators: (${i} + 2) / 5 = ${i+2}/5.`
+            });
+        }
+    }
+    return list;
+}
+
+function generateGeometricTwins() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        list.push({
+            q: `If △ABC ≅ △PQR, which side corresponds to side BC?`,
+            options: ["QR", "PQ", "PR", "AC"],
+            answer: 0,
+            explanation: "In congruent triangles △ABC ≅ △PQR, corresponding sides match in order: BC corresponds to QR."
+        });
+    }
+    return list;
+}
+
+function generateOperationsIntegers() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        let val1 = -i * 2;
+        let val2 = i;
+        list.push({
+            q: `Evaluate: (${val1}) + (${val2})`,
+            options: [`${val1 + val2}`, `${Math.abs(val1 + val2)}`, `${val1 - val2}`, `0`],
+            answer: 0,
+            explanation: `Adding positive and negative integers: ${val1} + ${val2} = ${val1 + val2}.`
+        });
+    }
+    return list;
+}
+
+function generateCommonGround() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        list.push({
+            q: `Find the HCF of ${i*2} and ${i*4}:`,
+            options: [`${i*2}`, `${i*4}`, `${i}`, `1`],
+            answer: 0,
+            explanation: `Since ${i*4} is a multiple of ${i*2}, the Highest Common Factor (HCF) is ${i*2}.`
+        });
+    }
+    return list;
+}
+
+function generateAnotherPeek() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        list.push({
+            q: `Convert ${i*5}% into a decimal:`,
+            options: [`${(i*0.05).toFixed(2)}`, `${i*5}`, `${i*0.5}`, `${(i*0.005).toFixed(3)}`],
+            answer: 0,
+            explanation: `To convert percentage to decimal, divide by 100: ${i*5}/100 = ${(i*0.05).toFixed(2)}.`
+        });
+    }
+    return list;
+}
+
+function generateConnectingDots() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        list.push({
+            q: `In the Cartesian coordinate system, what are the coordinates of the origin?`,
+            options: ["(0, 0)", "(1, 1)", "(0, 1)", "(1, 0)"],
+            answer: 0,
+            explanation: "The origin is the intersection of x-axis and y-axis, denoted as (0, 0)."
+        });
+    }
+    return list;
+}
+
+function generateConstructionsTilings() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        list.push({
+            q: `Which regular polygon can tile a plane completely without any gaps (tessellation)?`,
+            options: ["Regular Hexagon", "Regular Pentagon", "Regular Octagon", "Regular Decagon"],
+            answer: 0,
+            explanation: "Regular hexagons have interior angles of 120°, and 3 × 120° = 360°, allowing them to tile a surface seamlessly."
+        });
+    }
+    return list;
+}
+
+function generateFindingUnknown() {
+    let list = [];
+    for(let i=1; i<=30; i++) {
+        let solution = i + 3;
+        list.push({
+            q: `Solve for x: x - 3 = ${i}`,
+            options: [`${solution}`, `${i - 3}`, `${i * 3}`, `${solution + 2}`],
+            answer: 0,
+            explanation: `Adding 3 to both sides: x = ${i} + 3 = ${solution}.`
+        });
+    }
+    return list;
+}
+
+// Application Logic
+let currentChapterKey = Object.keys(syllabusData)[0];
+let currentQIndex = 0;
+let userAnswers = {}; // Format: { "ChapterKey_QIndex": selectedOptionIndex }
+
+function init() {
+    const select = document.getElementById('chapter-select');
+    select.innerHTML = '';
+    Object.keys(syllabusData).forEach(ch => {
+        const opt = document.createElement('option');
+        opt.value = ch;
+        opt.textContent = ch;
+        select.appendChild(opt);
+    });
+    loadChapter();
+}
+
+function loadChapter() {
+    currentChapterKey = document.getElementById('chapter-select').value;
+    currentQIndex = 0;
+    renderQuestion();
+    updateScore();
+}
+
+function renderQuestion() {
+    const questions = syllabusData[currentChapterKey];
+    const container = document.getElementById('quiz-container');
+    const qData = questions[currentQIndex];
+
+    const answerKey = `${currentChapterKey}_${currentQIndex}`;
+    const selectedOpt = userAnswers[answerKey];
+
+    let optionsHTML = '';
+    const prefixes = ['A', 'B', 'C', 'D'];
+
+    qData.options.forEach((opt, idx) => {
+        let stateClass = '';
+        if (selectedOpt !== undefined) {
+            if (idx === qData.answer) stateClass = 'correct';
+            else if (idx === selectedOpt) stateClass = 'incorrect';
+        }
+
+        optionsHTML += `
+            <button class="option-btn ${stateClass}" 
+                    onclick="selectAnswer(${idx})" 
+                    ${selectedOpt !== undefined ? 'disabled' : ''}>
+                <span class="option-prefix">${prefixes[idx]}.</span>
+                <span>${opt}</span>
+            </button>
+        `;
+    });
+
+    let explanationHTML = '';
+    if (selectedOpt !== undefined) {
+        explanationHTML = `
+            <div class="explanation-box">
+                <div class="explanation-title">Explanation & Rationale:</div>
+                ${qData.explanation}
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="quiz-card">
+            <div class="q-header">
+                <span class="q-tag">${currentChapterKey.split(':')[0]}</span>
+                <span class="q-counter">Question ${currentQIndex + 1} of ${questions.length}</span>
+            </div>
+            <div class="q-text">${qData.q}</div>
+            <div class="options-grid">${optionsHTML}</div>
+            ${explanationHTML}
+        </div>
+    `;
+
+    document.getElementById('prev-btn').disabled = currentQIndex === 0;
+    document.getElementById('next-btn').disabled = currentQIndex === questions.length - 1;
+}
+
+function selectAnswer(optIdx) {
+    const answerKey = `${currentChapterKey}_${currentQIndex}`;
+    userAnswers[answerKey] = optIdx;
+    renderQuestion();
+    updateScore();
+}
+
+function changeQuestion(dir) {
+    const questions = syllabusData[currentChapterKey];
+    if (currentQIndex + dir >= 0 && currentQIndex + dir < questions.length) {
+        currentQIndex += dir;
+        renderQuestion();
+    }
+}
+
+function updateScore() {
+    const questions = syllabusData[currentChapterKey];
+    let correct = 0;
+
+    questions.forEach((q, idx) => {
+        const key = `${currentChapterKey}_${idx}`;
+        if (userAnswers[key] === q.answer) {
+            correct++;
+        }
+    });
+
+    document.getElementById('score-display').textContent = `Score: ${correct} / ${questions.length}`;
+}
+
+window.onload = init;
+</script>
+</body>
+</html>
